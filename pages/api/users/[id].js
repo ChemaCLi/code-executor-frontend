@@ -7,6 +7,8 @@ export default async function handleer(req, res) {
         return updateUser(req, res)
       case 'DELETE':
         return deleteUser(req, res)
+      case 'GET':
+        return getUser(req, res)
       default:
         return res.status(405).json({ error: "Method not allowed in this path" })
     }
@@ -15,6 +17,15 @@ export default async function handleer(req, res) {
   } finally {
     prisma.$disconnect()
   }
+}
+
+const getUser = async (req, res) => {
+  const { query: { id } } = req
+
+  const user = await prisma.user.findUnique({ where: Number(id) })
+
+  res.status(200).json({ data: user })
+  return user
 }
 
 const updateUser = async (req, res) => {
