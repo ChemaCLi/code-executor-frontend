@@ -10,12 +10,12 @@ export const UserModal = ({
   selectedItem = null,
   ...props
 }) => {
-  const { UserService } = useServiceLayer()
+  const { userService } = useServiceLayer()
   const [saving, setSaving] = useState(false)
   const [form] = Form.useForm()
 
   const { data: user, loading, reset } = useService(
-    UserService.getById,
+    userService.getById,
     { id: selectedItem?.id },
     { shouldFetch: selectedItem?.id && visible}
   )

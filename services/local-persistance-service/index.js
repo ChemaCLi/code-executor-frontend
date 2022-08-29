@@ -1,11 +1,23 @@
+import { v4 as uuid } from "uuid"
+
 const sleep = (ms) =>
   new Promise((resolve) => setTimeout(resolve, ms))
 
-const saveData = async (entity, data) => {
-  const items = await getData(entity) ?? []
+const createEntry = (entityName, data) => {
+  data.id = uuid() // generate a random id
+  saveData(entityName, data)
+}
+
+const updateEntry = (entityName, data) => {
+  if (!data.id) throw new Error("The ID is required")
+  saveData(entityName, data)
+}
+
+const saveData = async (entityName, data) => {
+  const items = await getData(entityName) ?? []
 
   const updatedItems = updateItemInItemsById(data, items)
-  localStorage.setItem(entity, JSON.stringify(updatedItems))
+  localStorage.setItem(entityName, JSON.stringify(updatedItems))
 
   return data;
 }
@@ -49,6 +61,8 @@ const removeItemById = async (entity, id) => {
 export const LocalPersistanceService = {
   getData,
   saveData,
+  updateEntry,
+  createEntry,
   removeItemById,
   getFullItemById
 }

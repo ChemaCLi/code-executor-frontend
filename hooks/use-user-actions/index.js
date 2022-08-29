@@ -1,10 +1,10 @@
 import { message, Modal } from "antd"
 
-export const useUserActions = ({ UserService }) => {
+export const useUserActions = ({ userService }) => {
   const onCreateUser = async ({ name, email, onCompleted }) => {
     const dismissLoader = message.loading("Guardando...")
     try {
-      const newUser = await UserService.create({ name, email })
+      const newUser = await userService.create({ name, email })
       message.success("Usuario guardado")
       onCompleted && onCompleted(newUser)
       return newUser
@@ -19,7 +19,7 @@ export const useUserActions = ({ UserService }) => {
   const onEditUser = async ({ id, name, email, onCompleted }) => {
     const dismissLoader = message.loading("Guardando...")
     try {
-      const updatedUser = await UserService.update({ name, email, id })
+      const updatedUser = await userService.update({ name, email, id })
       message.success("Usuario actualizado")
       onCompleted && onCompleted(updatedUser)
       return updatedUser
@@ -38,7 +38,7 @@ export const useUserActions = ({ UserService }) => {
       title: "¿Estás seguro de eliminar este usuario?",
       onOk: async () => {
         try {
-          await UserService.deleteById({ id })
+          await userService.deleteById({ id })
           message.success("Usuario eliminado")
           onCompleted && onCompleted()
         } catch(e) {

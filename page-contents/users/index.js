@@ -7,15 +7,15 @@ import { UserAddOutlined } from '@ant-design/icons';
 
 export const UsersManagementPageContent = () => {
   const modalRef = useRef()
-  const { UserService } = useServiceLayer()
+  const { userService } = useServiceLayer()
 
-  const { data: users, loading, refetch } = useService(UserService.getAll)
+  const { data: users, loading, refetch } = useService(userService.getAll)
 
   const {
     onEditUser,
     onCreateUser,
     onDeleteUser,
-  } = useUserActions({ UserService })
+  } = useUserActions({ userService })
 
   const handleOnCreateUser = async ({ name, email }) => {
     await onCreateUser({ name, email, onCompleted: refetch })
