@@ -5,12 +5,12 @@ const sleep = (ms) =>
 
 const createEntry = (entityName, data) => {
   data.id = uuid() // generate a random id
-  saveData(entityName, data)
+  return saveData(entityName, data)
 }
 
 const updateEntry = (entityName, data) => {
   if (!data.id) throw new Error("The ID is required")
-  saveData(entityName, data)
+  return saveData(entityName, data)
 }
 
 const saveData = async (entityName, data) => {
