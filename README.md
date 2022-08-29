@@ -31,3 +31,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - The persistance logic is encapsulated in the `services` directory
 - Backend code is under the `pages/api` directory
 
+## Use a DB
+If you want to use the db just fill the the .env vars and run (you need docker)
+```
+docker-compose up -d
+```

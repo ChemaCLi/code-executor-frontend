@@ -1,0 +1,24 @@
+version: "3"
+
+networks:
+  fullstack-next-boilerplate:
+
+volumes:
+  db-fullstack-next-boilerplate:
+
+services:
+  postgres:
+    image: postgres:12
+    hostname: postgres
+    restart: unless-stopped
+    container_name: postgres-fullstack-next-boilerplate
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - db-fullstack-next-boilerplate:/var/lib/postgresql/data
+    networks:
+      - fullstack-next-boilerplate
