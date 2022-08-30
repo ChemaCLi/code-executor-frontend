@@ -1,7 +1,7 @@
 import React from "react"
 import { List, Button } from "antd"
 import { BigHead } from "@bigheads/core"
-import { getRandomBigheadOptions } from "../../utils"
+import { getRandomBigheadOptions } from "../../../utils"
 
 /**
  * @param {object} props

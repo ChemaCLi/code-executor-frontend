@@ -1,7 +1,9 @@
 import { Button } from "antd"
 import { useRef } from "react"
 import { ImperativeModal } from "../../contexts"
-import { UserModal, UsersList, ContentContainer } from "../../components"
+import { ContentContainer } from "../shared"
+import { UserModal } from "./user-modal"
+import { UsersList } from "./users-list"
 import { useService, useUserActions, useServiceLayer } from "../../hooks"
 import { UserAddOutlined } from '@ant-design/icons';
 

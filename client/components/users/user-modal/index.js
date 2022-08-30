@@ -1,6 +1,6 @@
-import { Modal, Form, Input, Typography } from "antd"
+import { Modal, Form, Input, Typography, message } from "antd"
 import { useEffect, useState } from "react"
-import { useServiceLayer, useService } from "../../hooks"
+import { useServiceLayer, useService } from "../../../hooks"
 
 export const UserModal = ({
   visible,
@@ -14,17 +14,21 @@ export const UserModal = ({
   const [saving, setSaving] = useState(false)
   const [form] = Form.useForm()
 
-  const { data: user, loading, reset } = useService(
+  const { data: user, loading, reset, error } = useService(
     userService.getById,
     { id: selectedItem?.id },
     { shouldFetch: selectedItem?.id && visible}
   )
 
   useEffect(() => {
+    if (error) {
+      message.error("Ocurrió un error al cargar los datos")
+    }
+
     if (user && !loading && visible) {
       return form.setFieldsValue({ ...user })
     }
-  }, [form, user, visible, loading])
+  }, [form, user, visible, loading, error])
 
   const handleOnOk = async () => {
     setSaving(true)
