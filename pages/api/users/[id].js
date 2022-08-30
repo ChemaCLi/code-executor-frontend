@@ -22,7 +22,7 @@ export default async function handleer(req, res) {
 const getUser = async (req, res) => {
   const { query: { id } } = req
 
-  const user = await prisma.user.findUnique({ where: Number(id) })
+  const user = await prisma.user.findUnique({ where: { id: Number(id) } })
 
   res.status(200).json({ data: user })
   return user
