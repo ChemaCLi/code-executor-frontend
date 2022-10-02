@@ -7,7 +7,7 @@ export default function Users() {
   return (
     <ServiceLayerProvider
       services={{
-        userService: userService(restUserRepository)
+        userService: userService(restUserRepository())
       }}>
       <UsersManagementPageContent />
     </ServiceLayerProvider>

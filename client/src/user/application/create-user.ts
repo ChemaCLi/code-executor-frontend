@@ -10,5 +10,5 @@ export interface CreateUserData {
 export const createUser = (userRepository: UserRepository, userData: CreateUserData) => {
   const userToSave = new User(userData)
   propertiesChecker({ email: true }, userData)
-  return userRepository().createUser(userToSave)
+  return userRepository.createUser(userToSave)
 }

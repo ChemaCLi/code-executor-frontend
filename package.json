@@ -33,6 +33,7 @@
     "@storybook/manager-webpack5": "^6.5.10",
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
+    "@types/node": "^18.8.0",
     "@types/react": "^18.0.21",
     "babel-loader": "^8.2.5",
     "eslint": "8.23.0",
