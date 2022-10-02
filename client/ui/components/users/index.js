@@ -9,7 +9,7 @@ export const UsersManagementPageContent = () => {
   const modalRef = useRef()
   const { userService } = useServiceLayer()
 
-  const { data: users, loading, refetch } = useService(userService.getAll)
+  const { data: users, loading, refetch } = useService(userService.searchUsers)
 
   const {
     onEditUser,

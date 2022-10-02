@@ -1,4 +1,4 @@
-import { axiosConnector } from "../../../utils"
+import { axiosConnector } from "../../../../../ui/utils"
 
 export const create = async ({
   name,

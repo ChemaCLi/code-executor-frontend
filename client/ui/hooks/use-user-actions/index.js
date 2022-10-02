@@ -4,7 +4,7 @@ export const useUserActions = ({ userService }) => {
   const onCreateUser = async ({ name, email, onCompleted }) => {
     const dismissLoader = message.loading("Guardando...")
     try {
-      const newUser = await userService.create({ name, email })
+      const newUser = await userService.createUser({ name, email })
       message.success("Usuario guardado")
       onCompleted && onCompleted(newUser)
       return newUser
@@ -19,7 +19,7 @@ export const useUserActions = ({ userService }) => {
   const onEditUser = async ({ id, name, email, onCompleted }) => {
     const dismissLoader = message.loading("Guardando...")
     try {
-      const updatedUser = await userService.update({ name, email, id })
+      const updatedUser = await userService.updateUser({ name, email, id })
       message.success("Usuario actualizado")
       onCompleted && onCompleted(updatedUser)
       return updatedUser

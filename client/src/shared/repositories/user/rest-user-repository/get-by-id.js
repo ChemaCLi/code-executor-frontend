@@ -1,4 +1,4 @@
-import { axiosConnector } from "../../../utils"
+import { axiosConnector } from "../../../../../ui/utils"
 
 export const getById = async ({ id }) => {
   const result = await axiosConnector.get(`/users/${id}`)
