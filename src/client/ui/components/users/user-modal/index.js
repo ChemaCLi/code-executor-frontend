@@ -16,7 +16,7 @@ export const UserModal = ({
   const [form] = Form.useForm()
 
   const { data: user, loading, reset, error } = useService(
-    userService.getById,
+    userService.findUserById,
     { id: selectedItem?.id },
     { shouldFetch: selectedItem?.id && visible}
   )
@@ -24,6 +24,7 @@ export const UserModal = ({
   useEffect(() => {
     if (error) {
       message.error("Ocurrió un error al cargar los datos")
+      console.error(error)
     }
 
     if (user && !loading && visible) {

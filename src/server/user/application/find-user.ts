@@ -1,7 +1,7 @@
 import { UserRepository } from "../domain/user-repository"
 
 export interface FindUserData {
-  id: string
+  id: number
 }
 
 export const findUser = async (

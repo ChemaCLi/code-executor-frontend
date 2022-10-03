@@ -1,12 +1,12 @@
 
 interface UserProperties {
-  id?: string
+  id?: number
   name?: string
   email?: string
 }
 
 export class User {
-  public id: string
+  public id: number
   public name: string
   public email: string
 

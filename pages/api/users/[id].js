@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 const getSingleUser = async (req, res) => {
   const { query: { id } } = req
   const userRepository = prismaUserRepository(prisma)
-  const user = await userService(userRepository).findUser({ id })
+  const user = await userService(userRepository).findUser({ id: Number(id) })
   res.status(200).json({ data: user })
 }
 
@@ -35,7 +35,7 @@ const updateUser = async (req, res) => {
   } = req
 
   const userRepository = prismaUserRepository(prisma)
-  const updatedUser = await userRepository.updateUser({ id, name })
+  const updatedUser = await userRepository.updateUser({ id: Number(id), name })
   res.status(202).json({ data: updatedUser })
 }
 
@@ -45,7 +45,7 @@ const deleteUser = async (req, res) => {
   } = req
 
   const userRepository = prismaUserRepository(prisma)
-  const deletedUser = userRepository.deleteUser({ id })
+  const deletedUser = userRepository.deleteUser({ id: Number(id) })
 
   res.status(202).json({ data: deletedUser })
   return deletedUser
