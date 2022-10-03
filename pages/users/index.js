@@ -1,7 +1,7 @@
-import { ServiceLayerProvider } from "../../client/ui/contexts"
-import { UsersManagementPageContent } from "../../client/ui/components/users"
-import { userService } from "../../client/src/user/application/user-service"
-import { restUserRepository } from "../../client/src/user/infrastructure/rest-user-repository"
+import { ServiceLayerProvider } from "../../src/client/ui/contexts"
+import { userService } from "../../src/client/src/user/application/user-service"
+import { UsersManagementPageContent } from "../../src/client/ui/components/users"
+import { restUserRepository } from "../../src/client/src/user/infrastructure/rest-user-repository"
 
 export default function Users() {
   return (

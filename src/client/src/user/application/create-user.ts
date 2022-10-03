@@ -1,5 +1,5 @@
-import { User } from "../domain/user"
 import { UserRepository } from "../domain/user-repository"
+import { User } from "../../../../shared-logic/user/domain/user"
 import { propertiesChecker} from "../../shared/utils/properties-checker"
 
 export interface CreateUserData {
@@ -7,7 +7,7 @@ export interface CreateUserData {
   email: string
 }
 
-export const createUser = (userRepository: UserRepository, userData: CreateUserData) => {
+export const createUser = (userData: CreateUserData, userRepository: UserRepository) => {
   const userToSave = new User(userData)
   propertiesChecker({ email: true }, userData)
   return userRepository.createUser(userToSave)

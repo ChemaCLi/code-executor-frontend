@@ -1,4 +1,3 @@
-import { User } from "../domain/user"
 import { UserRepository } from "../domain/user-repository"
 
 export interface UpdateUserData {
@@ -6,6 +5,9 @@ export interface UpdateUserData {
   name: string
 }
 
-export const updateUser = async (userRepository: UserRepository, data: UpdateUserData) => {
-  return await userRepository.updateUser(data) as User
+export const updateUser = async (
+  { id, name }: UpdateUserData,
+  userRepository: UserRepository
+) => {
+  return await userRepository.updateUser({ id, name })
 }

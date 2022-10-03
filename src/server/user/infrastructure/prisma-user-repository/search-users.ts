@@ -2,11 +2,9 @@ import { UserRepositorySearchUsers } from "../../domain/user-repository"
 
 export const searchUsers: UserRepositorySearchUsers = async ({ name }, prisma) => {
   try {
-    return prisma.user.findMany({
+    return await prisma.user.findMany({
       where: {
-        OR: [
-          { name: { contains: name } }
-        ]
+        name: { contains: name, mode: "insensitive" }
       }
     }) || []
   } catch (e) {

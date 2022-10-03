@@ -1,10 +1,11 @@
-import { User } from "../domain/user"
+import { User } from "../../../../shared-logic/user/domain/user"
 import {
   UserRepository,
   UserRepositoryFindUser,
   UserRepositoryCreateUser,
   UserRepositoryUpdateUser,
-  UserRepositorySearchUsers,
+  UserRepositoryDeleteUser,
+  UserRepositorySearchUsers
 } from "../domain/user-repository"
 import { axios } from "../../shared/utils/axios"
 
@@ -37,10 +38,16 @@ export const restUserRepository = (): UserRepository => {
     return result.data?.data || []
   }
 
+  const deleteUser: UserRepositoryDeleteUser = async ({ id }) => {
+    const result = await axios.delete(`/users/${id}`)
+    return result.data?.data
+  }
+
   return {
     createUser,
     updateUser,
     findUser,
-    searchUsers
+    searchUsers,
+    deleteUser
   }
 }
