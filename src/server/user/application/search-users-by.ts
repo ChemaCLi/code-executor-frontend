@@ -4,6 +4,9 @@ export interface SearchUsersCriteria {
   name?: string
 }
 
-export const searchUsersBy = (userRepository: UserRepository, criteria: SearchUsersCriteria) => {
+export const searchUsersBy = (
+  criteria: SearchUsersCriteria,
+  userRepository: UserRepository
+) => {
   return userRepository.searchUsers(criteria)
 }

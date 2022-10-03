@@ -1,8 +1,8 @@
 import { prisma } from "../prisma-client"
-import { prismaUserRepository } from "../../../server/user/infrastructure/prisma-user-repository"
-import { userService } from "../../../server/user/application/user-service";
+import { userService } from "../../../src/server/user/application/user-service"
+import { prismaUserRepository } from "../../../src/server/user/infrastructure/prisma-user-repository"
 
-export default async function handleer(req, res) {
+export default async function handler(req, res) {
   try {
     switch (req.method) {
       case 'POST':
@@ -19,21 +19,22 @@ export default async function handleer(req, res) {
   }
 }
 
-const getUsers = async (req, res) => {
-  const users = await userService(prismaUserRepository()).searchUsersBy({})
-  res.status(200).json({ data: users })
-  return users
-}
-
 const createUser = async (req, res) => {
-  console.log("lets create a new user!")
   const {
-    body: { email, name },
+    body: { email, name }
   } = req
 
-  const newUser = await userService(prismaUserRepository())
+  const newUser = await userService(prismaUserRepository(prisma))
     .createUser({ email, name })
 
   res.status(201).json({ data: newUser })
-  return newUser
 }
+
+const getUsers = async (req, res) => {
+  const users = await userService(prismaUserRepository(prisma))
+    .searchUsersBy({
+      name: req.query.name
+    })
+  res.status(200).json({ data: users })
+}
+

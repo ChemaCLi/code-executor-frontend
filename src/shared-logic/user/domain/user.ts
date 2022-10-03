@@ -6,9 +6,9 @@ interface UserProperties {
 }
 
 export class User {
-  private id?: string
-  private name?: string
-  private email?: string
+  public id: string
+  public name: string
+  public email: string
 
   constructor(properties: UserProperties) {
     this.setId(properties.id)

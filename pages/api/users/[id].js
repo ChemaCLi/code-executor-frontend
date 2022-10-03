@@ -1,14 +1,16 @@
 import { prisma } from "../prisma-client"
+import { userService } from "../../../src/server/user/application/user-service";
+import { prismaUserRepository } from "../../../src/server/user/infrastructure/prisma-user-repository";
 
-export default async function handleer(req, res) {
+export default async function handler(req, res) {
   try {
     switch (req.method) {
+      case 'GET':
+        return getSingleUser(req, res)
       case 'PATCH':
         return updateUser(req, res)
       case 'DELETE':
         return deleteUser(req, res)
-      case 'GET':
-        return getUser(req, res)
       default:
         return res.status(405).json({ error: "Method not allowed in this path" })
     }
@@ -19,43 +21,31 @@ export default async function handleer(req, res) {
   }
 }
 
-const getUser = async (req, res) => {
+const getSingleUser = async (req, res) => {
   const { query: { id } } = req
-
-  const user = await prisma.user.findUnique({ where: { id: Number(id) } })
-
+  const userRepository = prismaUserRepository(prisma)
+  const user = await userService(userRepository).findUser({ id })
   res.status(200).json({ data: user })
-  return user
 }
 
 const updateUser = async (req, res) => {
   const {
-    body: { email, name },
+    body: { name },
     query: { id }
   } = req
 
-  const updatedUser = await prisma.user.update({
-    where: { id: Number(id) },
-    data: {
-      name,
-      email,
-    }
-  })
+  const userRepository = prismaUserRepository(prisma)
+  const updatedUser = await userRepository.updateUser({ id, name })
   res.status(202).json({ data: updatedUser })
-  return updatedUser
 }
-
 
 const deleteUser = async (req, res) => {
   const {
     query: { id },
   } = req
 
-  const userId = Number(id)
-
-  const deletedUser = await prisma.user.delete({
-    where: { id: userId }
-  })
+  const userRepository = prismaUserRepository(prisma)
+  const deletedUser = userRepository.deleteUser({ id })
 
   res.status(202).json({ data: deletedUser })
   return deletedUser

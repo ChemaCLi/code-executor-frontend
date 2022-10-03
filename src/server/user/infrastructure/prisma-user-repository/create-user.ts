@@ -1,5 +1,5 @@
+import { User } from "../../../../shared-logic/user/domain/user"
 import { UserRepositoryCreateUser } from "../../domain/user-repository"
-import { User } from "../../domain/user"
 
 export const createUser: UserRepositoryCreateUser = async (newUserData, prisma) => {
   try {
