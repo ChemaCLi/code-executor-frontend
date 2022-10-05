@@ -21,7 +21,7 @@ export class User {
   }
 
   setName (name) {
-    if (name.length < 4) throw new Error("Name must be larger than 3 characters")
+    if (name.length < 4) throw new Error("Domain: Name must be larger than 3 characters")
     this.name = name
   }
 
