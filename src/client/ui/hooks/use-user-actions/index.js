@@ -6,11 +6,12 @@ export const useUserActions = ({ userService }) => {
     try {
       const newUser = await userService.createUser({ name, email })
       message.success("Usuario guardado")
-      onCompleted && onCompleted(newUser)
+      onCompleted && await onCompleted(newUser)
       return newUser
     } catch(e) {
       console.error(e)
       message.error(e.message)
+      throw e  // propagate the error to allow caller to handle the error
     } finally {
       dismissLoader()
     }
@@ -21,11 +22,12 @@ export const useUserActions = ({ userService }) => {
     try {
       const updatedUser = await userService.updateUser({ name, email, id })
       message.success("Usuario actualizado")
-      onCompleted && onCompleted(updatedUser)
+      onCompleted && await onCompleted(updatedUser)
       return updatedUser
     } catch(e) {
       console.error(e)
       message.error(e.message)
+      throw e
     } finally {
       dismissLoader()
     }
