@@ -25,17 +25,14 @@ const createUser = async (req, res) => {
     body: { email, name }
   } = req
 
-  const newUser = await userService(prismaUserRepository(prisma))
-    .createUser({ email, name })
-
+  const userRepository = prismaUserRepository(prisma)
+  const newUser = await userService(userRepository).createUser({ email, name })
   res.status(201).json({ data: newUser })
 }
 
 const getUsers = async (req, res) => {
-  const users = await userService(prismaUserRepository(prisma))
-    .searchUsersBy({
-      name: req.query.name
-    })
+  const userRepository = prismaUserRepository(prisma)
+  const users = await userService(userRepository).searchUsersBy({ name: req.query.name })
   res.status(200).json({ data: users })
 }
 
