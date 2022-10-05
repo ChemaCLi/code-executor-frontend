@@ -26,6 +26,7 @@ export class User {
   }
 
   setEmail (email) {
+    if (!email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)) throw new Error("Domain: wrong email format")
     this.email = email
   }
 }
