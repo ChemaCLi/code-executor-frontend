@@ -6,13 +6,14 @@ export default async function handler(req, res) {
   try {
     switch (req.method) {
       case 'POST':
-        return createUser(req, res)
+        return await createUser(req, res)
       case 'GET':
-        return getUsers(req, res)
+        return await getUsers(req, res)
       default:
         return res.status(405).json({ error: "Method not allowed in this path" })
     }
   } catch (e) {
+    console.error(e)
     res.status(500).json({ error: e?.message || e })
   } finally {
     prisma.$disconnect()
