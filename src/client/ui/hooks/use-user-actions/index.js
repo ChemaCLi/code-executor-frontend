@@ -42,7 +42,7 @@ export const useUserActions = ({ userService }) => {
         try {
           await userService.deleteById({ id })
           message.success("Usuario eliminado")
-          onCompleted && onCompleted()
+          onCompleted && await onCompleted()
         } catch(e) {
           console.error(e)
           message.error(e.message)
