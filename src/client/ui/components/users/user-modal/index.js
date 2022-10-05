@@ -43,11 +43,10 @@ export const UserModal = ({
       else
         onCreateUser && await onCreateUser({ name, email })
 
-      afterSuccess && afterSuccess()
+      afterSuccess && await afterSuccess()
       closeModal()
     } catch (e) {
       console.error(e)
-      throw e // propagate error to the onEditUser or onCreateUser callbacks
     } finally {
       setSaving(false)
     }
