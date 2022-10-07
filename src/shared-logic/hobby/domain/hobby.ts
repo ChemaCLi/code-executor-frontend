@@ -1,19 +1,21 @@
 import { isUndefined } from "../../shared/utils/is-undefined"
 
+type MediaType = "IMAGE" | "VIDEO" | "NOT_SPECIFIED"
+
 interface HobbyProperties {
   id?: string
   name?: string
   mediaUrl?: string
-  mediaType?: "IMAGE" | "VIDEO"
+  mediaType?: MediaType
   description?: string
 }
 
 export class Hobby implements Required<HobbyProperties> {
-  public id
-  public name
-  public mediaUrl
-  public mediaType
-  public description
+  public id: string
+  public name: string
+  public mediaUrl: string
+  public mediaType: MediaType
+  public description: string
 
   constructor(properties: HobbyProperties) {
     !isUndefined(properties.id) && this.setId(properties.id)
