@@ -12,6 +12,7 @@ interface ProfileProperties {
 interface Hobby {
   name: string
   imageUrl?: string
+  mediaType?: string
   description?: string
 }
 
