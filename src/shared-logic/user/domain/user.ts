@@ -2,14 +2,14 @@ import { Profile } from "../../profile/domain/profile"
 import { isUndefined } from "../../shared/utils/is-undefined"
 
 interface UserProperties {
-  id?: number
+  id?: string
   name?: string
   email?: string
   profile?: Profile
 }
 
-export class User {
-  public id: number
+export class User implements UserProperties {
+  public id: string
   public name: string
   public email: string
   public profile: Profile
@@ -21,16 +21,16 @@ export class User {
     !isUndefined(properties.profile) && this.setProfile(properties.profile)
   }
 
-  setId (id) {
+  setId(id: string) {
     this.id = id
   }
 
-  setName (name) {
+  setName(name: string) {
     if (name.length < 4) throw new Error("Domain: Name must be larger than 3 characters")
     this.name = name
   }
 
-  setEmail (email) {
+  setEmail(email: string) {
     if (!email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)) throw new Error("Domain: wrong email format")
     this.email = email
   }

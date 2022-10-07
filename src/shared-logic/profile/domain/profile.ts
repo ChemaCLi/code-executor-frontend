@@ -15,7 +15,7 @@ interface Hobby {
   description?: string
 }
 
-export class Profile {
+export class Profile implements ProfileProperties {
   public id: string
   public jobTitle: string
   public resume: string
