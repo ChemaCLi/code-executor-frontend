@@ -8,7 +8,7 @@ interface UserProperties {
   profile?: Profile
 }
 
-export class User implements UserProperties {
+export class User implements Required<UserProperties> {
   public id: string
   public name: string
   public email: string

@@ -1,3 +1,4 @@
+import { Hobby } from "../../hobby/domain/hobby"
 import { isUndefined } from "../../shared/utils/is-undefined"
 
 interface ProfileProperties {
@@ -8,15 +9,7 @@ interface ProfileProperties {
   hobbies?: Hobby[]
 }
 
-// @todo: Extract the Hobby logic to a separated entity
-interface Hobby {
-  name: string
-  imageUrl?: string
-  mediaType?: string
-  description?: string
-}
-
-export class Profile implements ProfileProperties {
+export class Profile implements Required<ProfileProperties> {
   public id: string
   public jobTitle: string
   public resume: string
@@ -57,9 +50,17 @@ export class Profile implements ProfileProperties {
   }
 
   setHobbies(hobbies: Hobby[]) {
-    if (hobbies.every(hobby => !!hobby))
+    const allHobbiesAreInstances = hobbies.every(h => (h instanceof Hobby))
+    const allHobbiesAreObjects = hobbies.every(h => (typeof h === "object"))
+
+    if (!allHobbiesAreInstances && !allHobbiesAreObjects)
+      throw new Error("Domain: a hobby must be an instance of Hobby or an object with the right contract implementation")
+
+    if (!hobbies.every(hobby => !!hobby))
       throw new Error("Domain: Some hobby hasn't a value")
 
-    this.hobbies = hobbies
+    this.hobbies = allHobbiesAreInstances
+      ? hobbies
+      : hobbies.map(h => new Hobby(h))
   }
 }
