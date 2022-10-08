@@ -5,9 +5,9 @@ import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core'
 
 export const CodeEditorContainer = () => {
-  const [output, setOutput] = useState("adasds")
+  const [output, setOutput] = useState("")
   const [code, setCode] = useState(
-    `print("Hello world")`
+    `print("Hola Platzi Dev House!")`
   );
 
   const buildCode = async () => {
@@ -39,11 +39,11 @@ export const CodeEditorContainer = () => {
     <div className={"MainContainer"}>
       <div className="Sidebar">
         <ul style={{ listStyle: "none", cursor: "pointer" }}>
-          <li className="Sidebar_Item">Nuevo</li>
+          <li className="Sidebar_Item">Nuevo proyecto</li>
           <li className="Sidebar_Item">Proyectos</li>
-          <li className="Sidebar_Item">Nuevo</li>
-          <li className="Sidebar_Item">Nuevo</li>
-          <li className="Sidebar_Item">Nuevo</li>
+          <li className="Sidebar_Item">Descargar binario</li>
+          <li className="Sidebar_Item">Descargar código fuente</li>
+          <li className="Sidebar_Item">Guardar cambios</li>
         </ul>
       </div>
       <div className="ContentContainer">
@@ -55,13 +55,13 @@ export const CodeEditorContainer = () => {
             padding={10}
             style={{
               fontFamily: '"Fira code", "Fira Mono", monospace',
-              fontSize: 12,
+              fontSize: 22,
             }}
           />
         </div>
         <div className="ExecuteButtonContainer">
-          <button onClick={onExecute}>
-            Execute
+          <button className="ExecuteButton" onClick={onExecute}>
+            Ejecutar
           </button>
         </div>
         <div className="OutputContainer">
