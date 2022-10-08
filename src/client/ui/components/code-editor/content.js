@@ -1,31 +1,31 @@
 import { useState } from "react"
-import { Form, message } from "antd"
+import axios from "axios"
+import { message } from "antd"
 import Editor from 'react-simple-code-editor';
-import { highlight, languages } from 'prismjs/components/prism-core';
-
-
+import { highlight, languages } from 'prismjs/components/prism-core'
 
 export const CodeEditorContainer = () => {
-  const [output, setOutput] = useState(null)
-  const [form] = Form.useForm()
+  const [output, setOutput] = useState("adasds")
   const [code, setCode] = useState(
-    `function add(a, b) {\n  return a + b;\n}`
+    `print("Hello world")`
   );
 
-  const buildCode = async (sourceText) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({ output: "Hola platzi" })
-      }, 1000)  
-    })
+  const buildCode = async () => {
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_REST_API_URL
+      const result = await axios.post(`${baseUrl}?source=${code}&lang=py`)
+      return result.data.ans
+    } catch (e) {
+      console.error(e)
+      message.error("Ocurrió un error. Checa la consola.")
+    }
   }
 
   const onExecute = async () => {
     const dismissLoader = message.loading("Compilando...")
     try {
-      const { sourceCode } = form.getFieldsValue()
-      const result = await buildCode(sourceCode)
-      setOutput(JSON.stringify(result))
+      const output = await buildCode(code)
+      setOutput(output)
       message.success("Compilado!")
     } catch (e) {
       message.error(e)
