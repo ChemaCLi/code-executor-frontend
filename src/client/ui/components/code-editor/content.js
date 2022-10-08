@@ -13,7 +13,7 @@ export const CodeEditorContainer = () => {
   const buildCode = async () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_REST_API_URL
-      const result = await axios.post(`${baseUrl}?source=${code}&lang=py`)
+      const result = await axios.post(`${baseUrl}?source=${encodeURIComponent(code)}&lang=py`)
       return result.data.ans
     } catch (e) {
       console.error(e)
